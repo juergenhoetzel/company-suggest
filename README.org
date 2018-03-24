@@ -1,5 +1,11 @@
 * Screenshot
 [[./screenshot.png]]
+
+* Supported backends
+
+  - [[https://www.wiktionary.org/][Wiktionary]]
+  - [[http://www.google.com/][Google]]
+
 * Future Improvements
 ** TODO Get rid of =(things-at-point 'sentence)= workaround
 ** TODO Make asynchronous
