@@ -16,7 +16,7 @@ Only supported by Google backend:
 
 *** Google
 #+BEGIN_SRC elisp
-(add-to-list 'company-backends 'company-suggest-wiktionary)
+(add-to-list 'company-backends 'company-suggest-google)
 #+END_SRC
 
 *** Wiktionary
