@@ -6,7 +6,7 @@
   - [[https://www.wiktionary.org/][Wiktionary]]
   - [[http://www.google.com/][Google]]
 
-** Setup backends
+** Configuration
 
 *** Sentence completion (experimental)
 Only supported by Google backend:
