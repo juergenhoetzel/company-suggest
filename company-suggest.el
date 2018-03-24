@@ -38,7 +38,7 @@
   :group 'convenience
   :group 'comm)
 
-(defcustom company-suggest-complete-sentence t
+(defcustom company-suggest-complete-sentence nil
   "When non-nil, use sentence to complete current word."
   :type 'boolean)
 
