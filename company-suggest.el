@@ -45,6 +45,9 @@
 (defvar company-suggest-google-url
   "https://suggestqueries.google.com/complete/search?q=%s&client=toolbar")
 
+(defvar company-suggest-wiktionary-url
+  "https://en.wiktionary.org/w/api.php?action=opensearch&format=json&formatversion=2&search=%s&namespace=0&limit=10&suggest=true")
+
 (defun company-suggest--google-candidates (prefix)
   "Return a list of Google suggestions matching PREFIX."
   (with-temp-buffer
@@ -89,6 +92,29 @@
 			(company-suggest--google-candidates arg)))))
 
 (add-to-list 'company-backends 'company-suggest-google)
+
+(defun company-suggest--wiktionary-candidates (prefix)
+  "Return a list of Wiktionary suggestions matching PREFIX."
+  (with-temp-buffer
+    (delete-region (point-min) (point-max))
+    (mm-url-insert (format company-suggest-wiktionary-url prefix))
+    (let ((json-array-type 'list)
+	  (json-object-type 'hash-table)
+	  (json-key-type 'string))
+      ;; FIXME: Error checking
+      (cadr (json-read)))))
+
+;;;###autoload
+(defun company-suggest-wiktionary (command &optional arg &rest ignored)
+  "`company-mode' completion backend for Wiktionary suggestions."
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-suggest-wiktionary))
+    (prefix (if (derived-mode-p 'text-mode)
+		(thing-at-point 'word)))
+    (candidates (company-suggest--wiktionary-candidates arg))))
+
+(add-to-list 'company-backends 'company-suggest-wiktionary)
 
 (provide 'company-suggest)
 ;;; company-suggest.el ends here
