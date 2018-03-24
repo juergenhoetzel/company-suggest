@@ -6,6 +6,25 @@
   - [[https://www.wiktionary.org/][Wiktionary]]
   - [[http://www.google.com/][Google]]
 
+** Setup backends
+
+*** Sentence completion (experimental)
+Only supported by Google backend:
+#+BEGIN_SRC elisp
+(setq company-suggest-complete-sentence t)
+#+END_SRC
+
+*** Google
+#+BEGIN_SRC elisp
+(add-to-list 'company-backends 'company-suggest-wiktionary)
+#+END_SRC
+
+*** Wiktionary
+
+#+BEGIN_SRC elisp
+(add-to-list 'company-backends 'company-suggest-wiktionary)
+#+END_SRC
+
 * Future Improvements
 ** TODO Get rid of =(things-at-point 'sentence)= workaround
 ** TODO Make asynchronous

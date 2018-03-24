@@ -91,8 +91,6 @@
 			    s))
 			(company-suggest--google-candidates arg)))))
 
-(add-to-list 'company-backends 'company-suggest-google)
-
 (defun company-suggest--wiktionary-candidates (prefix)
   "Return a list of Wiktionary suggestions matching PREFIX."
   (with-temp-buffer
@@ -113,8 +111,6 @@
     (prefix (if (derived-mode-p 'text-mode)
 		(thing-at-point 'word)))
     (candidates (company-suggest--wiktionary-candidates arg))))
-
-(add-to-list 'company-backends 'company-suggest-wiktionary)
 
 (provide 'company-suggest)
 ;;; company-suggest.el ends here
