@@ -53,11 +53,14 @@
   (let ((url-request-extra-headers '(("User-Agent" . "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181"))))
     (url-retrieve (format company-suggest-google-url (url-encode-url prefix))
 		  (lambda (buffer)
-		    (funcall callback (remove-if-not (lambda  (s)
-						       (string-prefix-p prefix s t))
-						     (mapcar (lambda (node)
-							       (decode-coding-string  (xml-get-attribute (car (xml-get-children node 'suggestion)) 'data) 'utf-8))
-							     (xml-get-children (car (xml-parse-region (point-min) (point-max))) 'CompleteSuggestion)))))
+		    (funcall callback
+			     (prog1
+				 (remove-if-not (lambda  (s)
+						  (string-prefix-p prefix s t))
+						(mapcar (lambda (node)
+							  (decode-coding-string  (xml-get-attribute (car (xml-get-children node 'suggestion)) 'data) 'utf-8))
+							(xml-get-children (car (xml-parse-region (point-min) (point-max))) 'CompleteSuggestion)))
+			       (kill-buffer))))
 		  nil t)))
 
 (defun company-suggest--sentence-at-point ()
