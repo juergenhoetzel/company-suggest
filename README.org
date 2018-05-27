@@ -27,7 +27,6 @@ Only supported by Google backend:
 
 * Future Improvements
 ** TODO Get rid of =(things-at-point 'sentence)= workaround
-** TODO Make asynchronous
 ** TODO More Backends
 *** TODO [[https://duckduckgo.com/][DuckDuckGo]] backend
 *** TODO [[https://www.bing.com/][Bing]] backend
