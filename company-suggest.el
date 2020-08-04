@@ -31,6 +31,7 @@
 (require 'mm-url)
 (require 'cl-lib)
 (require 'thingatpt)
+(require 'json)
 
 (defgroup company-suggest '()
   "Customization group for `company-suggest'."
