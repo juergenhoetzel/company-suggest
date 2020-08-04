@@ -55,11 +55,11 @@
 		  (lambda (buffer)
 		    (funcall callback
 			     (prog1
-				 (remove-if-not (lambda  (s)
-						  (string-prefix-p prefix s t))
-						(mapcar (lambda (node)
-							  (decode-coding-string  (xml-get-attribute (car (xml-get-children node 'suggestion)) 'data) 'utf-8))
-							(xml-get-children (car (xml-parse-region (point-min) (point-max))) 'CompleteSuggestion)))
+				 (cl-remove-if-not (lambda  (s)
+						     (string-prefix-p prefix s t))
+						   (mapcar (lambda (node)
+							     (decode-coding-string  (xml-get-attribute (car (xml-get-children node 'suggestion)) 'data) 'utf-8))
+							   (xml-get-children (car (xml-parse-region (point-min) (point-max))) 'CompleteSuggestion)))
 			       (kill-buffer))))
 		  nil t)))
 
