@@ -4,6 +4,7 @@
 
 ;; Author: Jürgen Hötzel <juergen@archlinux.org>
 ;; URL: https://github.com/juergenhoetzel/company-suggest
+;; Version: 1.0
 ;; Keywords: completion convenience
 ;; Package-Requires: ((company "0.9.0") (emacs "25.1"))
 
