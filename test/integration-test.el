@@ -38,7 +38,7 @@
     (let* ((company-suggest-complete-sentence t)
 	   (company-backend 'company-suggest-google)
 	   (results (mapcar #'downcase (company-call-backend 'candidates "Emacs is"))))
-      (expect results :to-contain "emacs is a great operating system"))))
+      (expect results :to-contain "emacs is an operating system"))))
 
 (describe "Wiktionary backend"
   (it "Completes single words"
