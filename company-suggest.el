@@ -36,6 +36,17 @@
 (require 'thingatpt)
 (require 'json)
 
+(defconst company-suggest--json-string-parser
+  (if (and (functionp 'json-parse-string)
+           (>= emacs-major-version 27))
+      (lambda (json-string)
+        (json-parse-string
+	 json-string
+         :object-type 'alist :array-type 'list
+         :null-object nil :false-object nil))
+    #'json-read-from-string)
+  "Function to use to parse JSON strings.")
+
 (defgroup company-suggest '()
   "Customization group for `company-suggest'."
   :link '(url-link "http://github.com/juergenhoetzel/company-suggest")
@@ -102,16 +113,17 @@
 
 (defun company-suggest--wiktionary-candidates (callback prefix)
   "Return a list of Wiktionary suggestions matching PREFIX."
-  (url-retrieve (format company-suggest-wiktionary-url (url-encode-url prefix)) 
+  (url-retrieve (format company-suggest-wiktionary-url (url-encode-url prefix))
 		(lambda (status)
 		  (when-let ((err (plist-get status :error)))
 		    (error "Error retrieving: %s: %s" (url-encode-url prefix) err))
 		  (when (re-search-forward "^$")
 		    (let ((json-array-type 'list)
 			  (json-object-type 'hash-table)
-			  (json-key-type 'string))
+			  (json-key-type 'string)
+			  (result-string (decode-coding-string (buffer-substring-no-properties  (point) (point-max)) 'utf-8)))
 		      ;; FIXME: Error checking
-		      (funcall callback (cadr (json-read-from-string (decode-coding-string (buffer-substring-no-properties  (point) (point-max)) 'utf-8)))))))
+		      (funcall callback (cadr (funcall company-suggest--json-string-parser result-string))))))
 		nil t))
 
 ;;;###autoload
