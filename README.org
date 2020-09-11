@@ -1,4 +1,4 @@
-[https://img.shields.io/github/workflow/status/juergenhoetzel/company-suggest/CI]
+[[https://github.com/juergenhoetzel/company-suggest][file:https://github.com/juergenhoetzel/company-suggest/workflows/CI/badge.svg]]
 * Screenshot
 [[./screenshot.png]]
 
