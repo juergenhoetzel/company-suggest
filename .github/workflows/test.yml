@@ -33,5 +33,5 @@ jobs:
 
     - name: Test the project
       run: |
-        # eldev -p -dtT -C test
+        eldev -p -dtT -C test
         eldev -dtT -C compile --set all --warnings-as-errors
